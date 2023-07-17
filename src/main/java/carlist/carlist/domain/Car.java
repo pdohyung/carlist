@@ -2,9 +2,12 @@ package carlist.carlist.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -31,13 +34,18 @@ public class Car {
 
 	private int price;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "owner_id")
+	private Owner owner;
+
 	@Builder
-	public Car(String brand, String model, String color, String registerNumber, int years, int price) {
+	public Car(String brand, String model, String color, String registerNumber, int years, int price, Owner owner) {
 		this.brand = brand;
 		this.model = model;
 		this.color = color;
 		this.registerNumber = registerNumber;
 		this.years = years;
 		this.price = price;
+		this.owner = owner;
 	}
 }
