@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.Transactional;
 
 import carlist.carlist.domain.Car;
 import carlist.carlist.domain.Owner;
@@ -32,6 +33,7 @@ public class CarListApplication implements CommandLineRunner {
 	}
 
 	@Override
+	@Transactional
 	public void run(String... args) throws Exception {
 		Owner owner1 = ownerRepository.save(new Owner("John", "Johnson"));
 		Owner owner2 = ownerRepository.save(new Owner("Mary", "Robinson"));
